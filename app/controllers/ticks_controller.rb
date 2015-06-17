@@ -1,0 +1,2 @@
+class TicksController < ApplicationController
+end
