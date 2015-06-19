@@ -22,7 +22,6 @@ namespace :tick do
   desc "Record periodic ticks"
   task :periodic, [:interval] => :environment do |task, args|
     interval = args.interval.to_f || 10
-    puts interval
     number = 0
     loop do
       number +=1 
