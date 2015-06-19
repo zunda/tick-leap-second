@@ -25,12 +25,11 @@ namespace :tick do
   end
 
   desc "Record periodic ticks"
-  task :periodic, [:interval] => :environment do |task, args|
-    interval = (args.interval || 10).to_f
-    number = 0
-    loop do
-      number +=1
-      tick = Tick.new(number: number, source: source(task))
+  task :repeat, [:interval, :repeat] => :environment do |task, args|
+    interval = (args.interval || 1).to_f
+    repeat = (args.repeat || 10).to_i
+    repeat.times do |i|
+      tick = Tick.new(number: i + 1, source: source(task))
       tick.save
       tick.reload
       puts readable(tick)
