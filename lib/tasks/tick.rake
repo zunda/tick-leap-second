@@ -37,7 +37,7 @@ namespace :tick do
     end
   end
 
-  desc "Record butst ticks"
+  desc "Record burst ticks"
   task :burst, [:burst_interval, :window, :window_interval] => :environment do |task, args|
     burst_interval = (args.burst_interval || 0.1).to_f
     window = (args.window || 2.5).to_f
