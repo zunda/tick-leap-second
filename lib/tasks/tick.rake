@@ -40,7 +40,7 @@ namespace :tick do
   desc "Record burst ticks"
   task :burst, [:burst_interval, :window, :window_interval] => :environment do |task, args|
     burst_interval = (args.burst_interval || 0.1).to_f
-    window = (args.window || 4.5).to_f
+    window = (args.window || 4.1).to_f
     window_interval = (args.window_interval || 3600).to_f
     number = 0
     loop do
@@ -54,7 +54,7 @@ namespace :tick do
           sleep burst_interval
         end while in_window?(window, window_interval)
       end
-      sleep window
+      sleep burst_interval * 2
     end
   end
 end
