@@ -4,7 +4,7 @@ namespace :tick do
   end
 
   def readable(tick)
-    "#{tick.source}:#{tick.number} " +
+    "#{tick.source} #{tick.group} #{tick.number} " +
     [:created_at, :server_time].map{|p|
       ts = tick.send(p)
       "#{p}:#{ts ? ts.strftime("%FT%T.%L") : 'nil'}"
@@ -18,7 +18,7 @@ namespace :tick do
 
   desc "Record a single tick"
   task :single => :environment do |task|
-    tick = Tick.new(number: 0, source: source(task))
+    tick = Tick.new(number: 0, group: 0, source: source(task))
     tick.save
     tick.reload
     puts readable(tick)
@@ -29,7 +29,7 @@ namespace :tick do
     interval = (args.interval || 1).to_f
     repeat = (args.repeat || 10).to_i
     repeat.times do |i|
-      tick = Tick.new(number: i + 1, source: source(task))
+      tick = Tick.new(number: i + 1, group: 0, source: source(task))
       tick.save
       tick.reload
       puts readable(tick)
@@ -43,11 +43,13 @@ namespace :tick do
     window = (args.window || 4.1).to_f
     window_interval = (args.window_interval || 3600).to_f
     number = 0
+    group = 0
     loop do
       if in_window?(window, window_interval)
+        group += 1
         begin
           number +=1
-          tick = Tick.new(number: number, source: source(task))
+          tick = Tick.new(number: number, group: group, source: source(task))
           tick.save
           tick.reload
           puts readable(tick)
