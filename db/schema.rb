@@ -11,18 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150620012732) do
+ActiveRecord::Schema.define(version: 20150622021207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "ticks", force: :cascade do |t|
     t.integer  "number"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.datetime "server_time", default: "now()"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.datetime "server_time",     default: "now()"
     t.string   "source"
     t.integer  "group"
+    t.datetime "dyno_time"
+    t.float    "dyno_time_float"
+    t.string   "dyno_time_str"
   end
 
 end

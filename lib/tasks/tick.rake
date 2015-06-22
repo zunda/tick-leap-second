@@ -3,14 +3,6 @@ namespace :tick do
    "#{ENV['DYNO'] || File.basename(__FILE__)}/#{task.name}"
   end
 
-  def readable(tick)
-    "#{tick.source} #{tick.group} #{tick.number} " +
-    [:created_at, :server_time].map{|p|
-      ts = tick.send(p)
-      "#{p}:#{ts ? ts.strftime("%FT%T.%L") : 'nil'}"
-    }.join(" ")
-  end
-
   def in_window?(window, interval)
     d = Time.now.to_f % interval
     return (d <= window / 2) || (interval - d <= window /2)
@@ -21,7 +13,7 @@ namespace :tick do
     tick = Tick.new(number: 0, group: 0, source: source(task))
     tick.save
     tick.reload
-    puts readable(tick)
+    puts tick
   end
 
   desc "Record periodic ticks"
@@ -32,7 +24,7 @@ namespace :tick do
       tick = Tick.new(number: i + 1, group: 0, source: source(task))
       tick.save
       tick.reload
-      puts readable(tick)
+      puts tick
       sleep interval
     end
   end
@@ -52,7 +44,7 @@ namespace :tick do
           tick = Tick.new(number: number, group: group, source: source(task))
           tick.save
           tick.reload
-          puts readable(tick)
+          puts tick
           sleep burst_interval
         end while in_window?(window, window_interval)
       end
