@@ -1,5 +1,5 @@
 class Tick < ActiveRecord::Base
-  STRING_FORMAT = "%FT%T.%L"
+  STRING_FORMAT = "%FT%T.%N"
 
   def initialize(*args)
     super
