@@ -34,11 +34,11 @@ namespace :tick do
     burst_interval = (args.burst_interval || 0.1).to_f
     window = (args.window || 4.1).to_f
     window_interval = (args.window_interval || 3600).to_f
-    number = 0
     group = 0
     loop do
       if in_window?(window, window_interval)
         group += 1
+        number = 0
         begin
           number +=1
           tick = Tick.new(number: number, group: group, source: source(task))
