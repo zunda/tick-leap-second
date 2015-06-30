@@ -36,6 +36,7 @@ namespace :tick do
     window = (args.window || 4.1).to_f
     window_interval = (args.window_interval || 3600).to_f
     group = 0
+    tick(0, 0, task)
     loop do
       if in_window?(window, window_interval)
         group += 1
