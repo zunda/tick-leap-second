@@ -8,12 +8,16 @@ namespace :tick do
     return (d <= window / 2) || (interval - d <= window /2)
   end
 
+  def tick(number, group, task)
+    t = Tick.new(number: number, group: group, source: source(task))
+    t.save
+    t.reload
+    puts t
+  end
+
   desc "Record a single tick"
   task :single => :environment do |task|
-    tick = Tick.new(number: 0, group: 0, source: source(task))
-    tick.save
-    tick.reload
-    puts tick
+    tick(0, 0, task)
   end
 
   desc "Record periodic ticks"
@@ -21,10 +25,7 @@ namespace :tick do
     interval = (args.interval || 1).to_f
     repeat = (args.repeat || 10).to_i
     repeat.times do |i|
-      tick = Tick.new(number: i + 1, group: 0, source: source(task))
-      tick.save
-      tick.reload
-      puts tick
+      tick(i + 1, 0, task)
       sleep interval
     end
   end
@@ -41,10 +42,7 @@ namespace :tick do
         number = 0
         begin
           number +=1
-          tick = Tick.new(number: number, group: group, source: source(task))
-          tick.save
-          tick.reload
-          puts tick
+          tick(number, group, task)
           sleep burst_interval
         end while in_window?(window, window_interval)
       end
