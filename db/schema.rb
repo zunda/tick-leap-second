@@ -18,8 +18,8 @@ ActiveRecord::Schema.define(version: 20150622021207) do
 
   create_table "ticks", force: :cascade do |t|
     t.integer  "number"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
     t.datetime "server_time",     default: "now()"
     t.string   "source"
     t.integer  "group"
