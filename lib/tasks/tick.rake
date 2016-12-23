@@ -22,7 +22,7 @@ namespace :tick do
 
   desc "Record periodic ticks"
   task :repeat, [:interval, :repeat] => :environment do |task, args|
-    interval = (args.interval || 1).to_f
+    interval = (args.interval || 0.1).to_f
     repeat = (args.repeat || 10).to_i
     repeat.times do |i|
       tick(i + 1, 0, task)
@@ -36,7 +36,6 @@ namespace :tick do
     window = (args.window || 4.1).to_f
     window_interval = (args.window_interval || 3600).to_f
     group = 0
-    tick(0, 0, task)
     loop do
       if in_window?(window, window_interval)
         group += 1
