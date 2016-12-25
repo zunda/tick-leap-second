@@ -1,1 +1,2 @@
-worker: bundle exec rake tick:burst
+worker: bundle exec rake tick:repeat tick:burst
+release: bundle exec rake db:migrate

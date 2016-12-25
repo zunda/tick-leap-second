@@ -2,10 +2,6 @@
 
 one:
   number: 1
-  client_time: 2015-06-16 17:03:48
-  server_time: 2015-06-16 17:03:48
 
 two:
-  number: 1
-  client_time: 2015-06-16 17:03:48
-  server_time: 2015-06-16 17:03:48
+  number: 2
