@@ -22,6 +22,6 @@ class Tick < ActiveRecord::Base
   end
 
   def to_s
-    "#{source} #{group} #{number} #{dyno_time_str ? dyno_time_str : created_at.strftime(STRING_FORMAT)} #{server_time ? server_time.strftime(STRING_FORMAT) : 'nil'}"
+    "#{source} #{group} #{number} #{dyno_time_str ? dyno_time_str : created_at.strftime(STRING_FORMAT)} #{server_time ? server_time.strftime(STRING_FORMAT) : 'nil'} #{uptime}"
   end
 end
