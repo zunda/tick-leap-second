@@ -1,5 +1,5 @@
 class Tick < ActiveRecord::Base
-  STRING_FORMAT = "%FT%T.%N"
+  STRING_FORMAT = "%FT%T.%NZ"
 
   if File.readable?('/proc/uptime')
     def Tick.uptime
