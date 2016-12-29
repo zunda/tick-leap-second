@@ -28,7 +28,7 @@ Plot:
 ```
 $ gnuplot
 set datafile separator ","
-set size square
+set size ratio -1
 set ydata time; set timefmt "%Y-%m-%dT%H:%M:%S"
 set key top left
 set ytics 1; set mytics 10
