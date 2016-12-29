@@ -32,7 +32,7 @@ set size square
 set ydata time; set timefmt "%Y-%m-%dT%H:%M:%S"
 set key top left
 set ytics 1; set mytics 10
-set xtics 1; set mxtics 10
+set xtics 1; set mxtics 10; set xrange [-0.5:4.5]
 set xlabel "Relative Uptime (sec)"
 set ylabel "System clock (UTC)"
 x0=real(system("awk -F, '{if(NF>=3){print($1);exit}}' data.csv"))
