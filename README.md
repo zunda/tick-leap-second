@@ -16,7 +16,8 @@ COPY (
 SELECT uptime,
   dyno_time_str,
   to_char(server_time, 'YYYY-MM-DD"T"HH24:MI:SS.US"Z"') as db_server_time
-FROM ticks WHERE created_at > NOW() - INTERVAL '1 HOUR'
+FROM ticks
+WHERE created_at > NOW() - INTERVAL '1 HOUR' AND source LIKE '%:burst'
 ORDER BY uptime
 ) TO STDOUT WITH CSV;
 _END
@@ -32,7 +33,9 @@ set ydata time; set timefmt "%Y-%m-%dT%H:%M:%S"
 set key top left
 set ytics 1; set mytics 10
 set xtics 1; set mxtics 10
-set xlabel "Uptime (sec)"
+set xlabel "Relative Uptime (sec)"
 set ylabel "System clock (UTC)"
-plot "data.csv" using 1:2 tit 'Dyno', "data.csv" using 1:3 tit 'DB server'
+x0=real(system("awk -F, '{if(NF>=3){print($1);exit}}' data.csv"))
+plot "data.csv" using ($1-x0):2 tit 'Dyno',\
+     "data.csv" using ($1-x0):3 tit 'DB server'
 ```
