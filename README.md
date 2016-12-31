@@ -11,7 +11,7 @@ heroku ps:scale web=0 worker=1
 Obtain recent set of records:
 
 ```
-$ heroku pg:psql << _END > data.csv
+$ heroku pg:psql << _END >| data.csv
 COPY (
 SELECT uptime,
   dyno_time_str,
