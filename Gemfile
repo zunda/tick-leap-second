@@ -6,6 +6,8 @@ gem 'rails', '>= 5.2.2', '< 6'
 # Use postgres as the database for Active Record
 gem 'pg', '~> 1.1'
 
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier', '>= 1.3.0'
 # Use SCSS for stylesheets
 gem 'sass-rails'
 # Use CoffeeScript for .coffee assets and views
