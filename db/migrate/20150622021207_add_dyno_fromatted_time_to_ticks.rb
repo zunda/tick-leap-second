@@ -1,4 +1,4 @@
-class AddDynoFromattedTimeToTicks < ActiveRecord::Migration
+class AddDynoFromattedTimeToTicks < ActiveRecord::Migration[4.2]
   def change
     add_column :ticks, :dyno_time, :datetime
     add_column :ticks, :dyno_time_float, :float

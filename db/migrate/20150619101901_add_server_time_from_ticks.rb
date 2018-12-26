@@ -1,4 +1,4 @@
-class AddServerTimeFromTicks < ActiveRecord::Migration
+class AddServerTimeFromTicks < ActiveRecord::Migration[4.2]
   def change
     reversible do |dir|
       change_table :ticks do |t|
