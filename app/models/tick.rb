@@ -5,8 +5,13 @@ class Tick < ActiveRecord::Base
     def Tick.uptime
       File.read('/proc/uptime').to_f
     end
+  elsif not `sysctl kern.boottime`.scan(/sec = \d+, usec = \d+/).empty?
+    def Tick.uptime
+      sec, usec = `sysctl kern.boottime`.scan(/sec = (\d+), usec = (\d+)/)[0]
+      Time.now - (sec.to_f + usec.to_f*1e-6)
+    end
   else
-    $stderr.puts "#{__FILE__}:#{__LINE__} /proc/uptime is not available. Will not record uptime."
+    $stderr.puts "#{__FILE__}:#{__LINE__} /proc/uptime or sysctl kern.boottime is not available. Will not record uptime."
     def Tick.uptime
       nil
     end
